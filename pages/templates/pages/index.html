@@ -1,0 +1,23 @@
+{% extends 'base_template.html' %}
+{% load static %}
+{% block 'content' %}
+
+  <header >                                                                                         
+    <h1>Urembo_for_us</h1>
+  </header>
+  <h2>Salons disponibles</h2>
+  
+    <div class="gallery">
+       
+        <img src="{% static 'pages/img/image1.jpg' %}">
+        <img src="{% static 'pages/img/image2.jpg' %}">
+        <img src="{% static 'pages/img/image3.jpg' %}">
+    </div>
+    
+  
+  <footer > 
+      
+    <h2> <a href="/account/">Créer un Beautycompte</a> </h2>
+    <h2> <a href="/apropos/">Savoir Plus</a> </h2>
+  </footer>
+{% endblock %}
