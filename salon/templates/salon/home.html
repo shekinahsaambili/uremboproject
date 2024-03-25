@@ -1,0 +1,16 @@
+
+
+{% extends 'base-template.html' %}
+{% block 'title' %}Urembo_for_us saloons{% endblock %}
+{% block 'content' %}
+<h1>tous les salons disponibles</h1>
+<ul>
+    {% for post in blog_posts %}
+    <a href="{% url 'salon:post_view' post.id %}">
+        <li>{{ post.title }} (<em>{{ post.pub_date }}</em>)</li>
+        </a>
+        {% endfor %}
+        
+    </ul>
+    
+{% endblock %}

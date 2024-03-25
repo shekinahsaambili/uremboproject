@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from uremboforus.local_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,6 +37,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 INSTALLED_APPS = [
     'base',
     'pages',
+    'blog',
+    'salon',
+    'product',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,8 +84,12 @@ WSGI_APPLICATION = 'uremboforus.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'UREMBOFORUS',
+        'USER': 'uremboforus',
+        'PASSWORD':DATABASE_PASSWORD,
+        'HOST' :'localhost',
+        'PORT':'3306',
     }
 }
 

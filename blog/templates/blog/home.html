@@ -1,0 +1,35 @@
+
+{% extends 'base_template.html' %}
+{% load static %}
+{% block 'content' %}
+  <header >                                                                                         
+    <h1>Urembo_for_us</h1>
+  </header>
+  <h1>salons disponibles</h1>
+  
+  <div class="gallery">
+
+      <ul>
+        {% for post in blog_posts %}
+        <a href="{% url 'blog:post_view' post.id %}">
+        <li>{{ post.title }} (<em>{{ post.pub_date }}</em>)</li>
+        </a>
+        {% endfor %}
+        </ul>
+        
+       
+       <!--<img src="{% static 'pages/img/image1.jpg' %}">
+        <img src="{% static 'pages/img/image2.jpg' %}">
+        <img src="{% static 'pages/img/image3.jpg' %}">--> 
+  </div>
+    
+  
+  <footer > 
+      
+    <h2> <a href="/account/">Créer un Beautycompte</a> </h2>
+    <h2> <a href="/apropos/">Savoir Plus</a> </h2>
+    <h2><a href="/"> page d'accueil</a></h2>
+  </footer>
+
+
+{% endblock %}
