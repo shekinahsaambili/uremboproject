@@ -1,0 +1,11 @@
+
+{% block 'title' %}nouveau produit{% endblock %}
+{% block 'content' %}
+<a href="{% url 'marchandise:home' %}">voir tous les produits</a>
+<form action="{% url 'marchandise:post-add' %}" method="post">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Submit">
+</form>
+{% endblock %}
+

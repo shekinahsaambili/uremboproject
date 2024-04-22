@@ -11,7 +11,7 @@
 
       <ul>
         {% for post in blog_post %}
-        <a href="{% url 'product:post_view' post.id %}">
+        <a href="{% url 'product:prod_view' post.id %}">
         <li>{{ post.title }} (<em>{{ post.pub_date }}</em>)</li>
         </a>
         {% endfor %}

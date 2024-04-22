@@ -1,0 +1,49 @@
+<!-- 
+{% extends 'base_template.html' %}
+{% load static %}
+{% block 'content' %}
+  <header >                                                                                         
+    <h1>Urembo_for_us</h1>
+  </header>
+  <h1>salons disponibles</h1>
+  
+  <div class="gallery">
+
+     
+        <a href="{% url 'blog:post-add' %}">Create a New Post</a>
+        <tableborder="1" align="center">
+          <thead>
+          <tr><th><h1>salons disponibles</h1>
+            </th>
+          <th>date de la publication</th>
+        </tr>
+      </thead>
+         <tbody>
+          
+            <tr>
+        {% for post in blog_posts %}
+        <a href="{{ post.get_absolute_url }}">
+        
+        <td>{{ post.title }}</td> 
+         <td>(<em>{{ post.pub_date }}</em>)</td>
+        </a>
+        {% endfor %}
+      </tbody>
+    </tr>
+        </ul>
+      </table>
+       
+      
+  </div>
+    
+  
+  <footer > 
+      
+    <h2> <a href="/account/">Créer un Beautycompte</a> </h2>
+    <h2> <a href="/apropos/">Savoir Plus</a> </h2>
+    <h2><a href="/"> page d'accueil</a></h2>
+  </footer>
+
+
+{% endblock %}
+Début du contenu principal -->

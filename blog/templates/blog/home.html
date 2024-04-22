@@ -5,23 +5,31 @@
   <header >                                                                                         
     <h1>Urembo_for_us</h1>
   </header>
-  <h1>salons disponibles</h1>
+  <div style="display: flex;">
+    <h1>salons disponibles</h1>
   
-  <div class="gallery">
-
-      <ul>
-        {% for post in blog_posts %}
-        <a href="{% url 'blog:post_view' post.id %}">
-        <li>{{ post.title }} (<em>{{ post.pub_date }}</em>)</li>
-        </a>
-        {% endfor %}
-        </ul>
-        
+    <a href="{% url 'blog:post-add' %}" style="padding-left:700px; "><button style="height: 50px ; margin-top: 20px;">Ajouter un  Salon</button> </a>
        
-       <!--<img src="{% static 'pages/img/image1.jpg' %}">
-        <img src="{% static 'pages/img/image2.jpg' %}">
-        <img src="{% static 'pages/img/image3.jpg' %}">--> 
   </div>
+  
+        
+      {% for post in blog_posts %}
+    <div>
+           <h1> <a href="{{ post.get_absolute_url }}">
+        
+            {{ post.title }}         </a> 
+          </h1>
+          <p> ce salon est disponible dans la ville depuis la date du (<em>{{ post.pub_date }}</em>)</p>
+      
+    </div>
+            
+              
+        {% endfor %}
+      
+    
+        
+      
+  
     
   
   <footer > 

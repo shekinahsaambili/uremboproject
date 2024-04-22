@@ -1,0 +1,29 @@
+
+
+
+{% block 'title' %}<div style="display: flex;">
+                      <h1>Les produits disponibles</h1>
+                      <h1 style="padding-left:700px ;"><a href="{% url 'marchandise:post-add' %}"><button style="height: 50px;">Ajouter un nouveau produit</button> </a></h1>
+
+                   </div> 
+{% endblock %}
+{% block 'content' %}
+
+    {% for post in marchandise_posts %}
+     <div>
+        <h2>
+            <a href="{% url 'marchandise:post_view' post.id %}">
+                {{ post.title }}
+            </a>
+        </h2>
+        <p>ce produit est diponible depuit le (<em>{{ post.pub_date }}</em>) </p>
+     </div>
+       
+        
+        
+         
+        {% endfor %}
+        
+    
+    
+{% endblock %}

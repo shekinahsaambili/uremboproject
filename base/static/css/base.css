@@ -4,6 +4,7 @@ header {
    
     }
 
+
 a{
     color: white;
 }
@@ -42,10 +43,15 @@ section{
     float: left;
 }
 body {
+    background:linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%,),url(image1copy.jpg);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}
+    width: 100%;
+    background-position:center;
+    background-size:cover;
+    height:109vh;
+        }
 
 header {
     background-color: #635848;

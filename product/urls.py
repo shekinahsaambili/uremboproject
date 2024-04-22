@@ -8,7 +8,7 @@ app_name = 'product'
 urlpatterns = [
 
 path('', views.home, name='home'),
-path('post/<int:post_id>/', views.product_post_view, name='post_view'),
+path('post/<int:post_id>/', views.product_post_view, name='prod_view'),
 ]
 
 

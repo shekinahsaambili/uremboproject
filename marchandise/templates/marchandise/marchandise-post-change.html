@@ -1,0 +1,14 @@
+{% extends 'base_template.html' %}
+{% block 'title' %}Edit Post: {{ post.title }}{% endblock %}
+{% block 'content' %}
+   <a href="{% url 'marchandise:home' %}">Home</a>
+   <p>
+    <a href="{% url 'marchandise:post_view' post.id %}">Back</a>
+    </p>
+   <h1>Edit Blog Post</h1>
+   <form action="{% url 'marchandise:post-change' post.id %}" method="post">
+       {% csrf_token %}
+       {{ form }}
+       <input type="submit" value="Submit">
+   </form>
+{% endblock %}

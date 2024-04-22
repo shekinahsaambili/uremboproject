@@ -1,0 +1,27 @@
+
+
+{% block content %}
+<div style="display: flex;">
+<h1>{{ post.title }}</h1>
+<p><a href="{% url 'marchandise:post-change' post.id %}">
+    <button>Edit</button>
+</a> </p>
+<p><a href="{% url 'marchandise:post-delete' post.id %}">
+    <button>Delete</button>
+</a> </p>
+<p><a href="/product/">ajouter un nouveau produit</a></p>
+</div>
+<p>{{ post.content }}</p>
+
+{% if post.is_published %}
+    <p>Published: <em>{{ post.pub_date }}</em></p>
+{% else %}
+    <form action="{% url 'marchandise:post-publish' post.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Publish">
+    </form>
+{% endif %}
+<footer>
+    
+</footer>
+{% endblock %}
