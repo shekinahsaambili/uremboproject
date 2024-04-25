@@ -3,6 +3,8 @@ from django.http import Http404
 from blog.models import*
 from blog.forms import BlogPostForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import permission_required,login_required
+
 #   from .models import blog_post
 
 
@@ -32,6 +34,8 @@ def blog_post_detail(request, post_id):
     }
     return render(request, 'blog/blog-post-detail.html', data)
 
+@login_required
+@permission_required('blog:add_blogpost', raise_exception=True)
 def blog_post_add(request):
     if request.method == "POST":
         form = BlogPostForm(request.POST)
@@ -42,6 +46,7 @@ def blog_post_add(request):
         form = BlogPostForm()
     return render(request, 'blog/blog-post-add.html', { 'form': form })
 
+@permission_required('blog.change_blogpost', raise_exception=True)
 def blog_post_change(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id) # Need to fetch the specific object
     if request.method == "POST":
@@ -53,6 +58,7 @@ def blog_post_change(request, post_id):
         form = BlogPostForm(instance=post)
     return render(request, 'blog/blog-post-change.html', { 'form': form, 'post': post })
 
+@permission_required('blog.delete_blogpost', raise_exception=True)
 def blog_post_delete(request, post_id):
  post = get_object_or_404(BlogPost, id=post_id)
  if request.method == "POST":
@@ -69,3 +75,18 @@ def blog_post_publish(request, post_id):
     post.save()
  # Redirect to the post's detail page
  return redirect(post)
+
+ # Liste des chemins d'accès des images
+IMAGES = [
+    "image1.jpg",
+    "image2.jpg",
+    "image3.jpg",
+]
+
+def random_image_view(request):
+    # Choisir aléatoirement une image
+    random_image = random.choice(IMAGES)
+    context = {
+        "random_image": random_image
+    }
+    return render(request, "home.html", context)

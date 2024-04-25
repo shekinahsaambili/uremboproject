@@ -29,12 +29,16 @@ DEBUG = True
 ALLOWED_HOSTS = []
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+LOGOUT_REDIRECT_URL = 'pages:index'
+LOGIN_REDIRECT_URL='accounts:profile'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'accounts',
     'base',
     'pages',
     'blog',

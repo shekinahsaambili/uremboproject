@@ -1,0 +1,32 @@
+{% extends 'base_template.html' %}
+
+{% block 'title' %}User Profile{% endblock %}
+
+{% block 'content' %}
+<main>
+    <div id="gallery" style="margin-top: 120px;">
+    <h1 id="div_titre">Profil d'utilisateur</h1>
+<h4 id="div_content">
+    <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+    <p><strong>Nom d'utilisateur:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+</h4>
+    <p>
+		<a href="{% url 'accounts:change-profile' %}">
+			<button id="btn">Edit Profile</button>
+		</a>
+    </p>
+    <p>
+		<a href="{% url 'password_change' %}">
+			<button id="btn">Change Password</button>
+		</a>
+    </p>
+    <h2 id="div_end"> <a href="/">home page</a> </h2>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+		<input type="submit" value="Log Out" id="log_out">
+    </form>
+</div>
+</main>
+{% endblock %}

@@ -2,25 +2,34 @@
 {% load static %}
 {% block 'content' %}
 
-  <header >                                                                                         
-    <h1>Urembo_for_us</h1>
-  </header>
-  <p><h3 style="color: rgb(46, 46, 119);">Bienvenue dans Urembo_for_us la solution à tes preoccupatios de beauté</h3><br> clic sur voir les salons diponibes pour voir tous les salons proposés pour toi <br> clic sur creer un Beautycompte pour creer un compte et beneficier de tous nos services
-  <br> clic sur savoir plus pour savoir plus de la plate forme Urembo_for_us</p>
   
-    <div class="gallery">
-       
-        <img src="{% static 'pages/img/image1.jpg' %}">
-        <img src="{% static 'pages/img/image2.jpg' %}">
-        <img src="{% static 'pages/img/image3.jpg' %}">
-        <h2> <a href="/blog/">voir tous les salons disponibles</a> </h2>
+  <div id="top_div">
+  {% if user.is_authenticated %}
+  <h2><a href="{% url 'accounts:profile' %}" id="compte_or_login"><button id="btn">consulter votre compte</button></h2>
+
+<h1> {{ user.first_name }} Urembo_for_us vous souhaite la bienvenue !</h1>
+{% else %}
+<h1><a href="{% url 'login' %}"><button id="btn">Login</button></h1>
+<h1>Bienvenue sur notre site officiel </h1>
+{% endif %}
+</div>
+
         
+  
+    <div id="gallery">
+       
+        
+        
+          <h2 id="div_titre">profitez au maximum des varietés des services qu'auffrent les differents salons de coiffure de la ville </h2>
+        
+        <h3 id="div_content"> clic sur voir les salons diponibes pour voir tous les salons proposés pour toi <br> clic sur creer un Beautycompte pour creer un compte et beneficier de tous nos services
+          <br> clic sur savoir plus pour savoir plus de la plate forme Urembo_for_us
+         </h3>
+
+        <h2 id="div_end"> <a href="/blog/">voir tous les salons disponibles</a> </h2>
+        <h2 id="div_end"> <a href="/apropos/">Savoir Plus</a> </h2>
+         
     </div>
     
   
-  <footer > 
-      
-    <h2> <a href="/account/">Créer un Beautycompte</a> </h2>
-    <h2> <a href="/apropos/">Savoir Plus</a> </h2>
-  </footer>
 {% endblock %}

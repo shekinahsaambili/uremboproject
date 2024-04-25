@@ -17,20 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from pages import views as p_view
+
 from django.conf import settings # NEW
 from django.conf.urls.static import static # NEW
 
 # NEW
 
 urlpatterns = [
-    path('',p_view.index),
-    path('account/',p_view.account),
-    path('apropos/',p_view.apropos),  #NEW
+     #NEW
     path('admin/', admin.site.urls),
     path('salon/', include('salon.urls')),
     path('blog/', include('blog.urls')),
     path('product/', include('product.urls')),
     path('marchandise/', include('marchandise.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('accounts.urls')), 
+    path('', include('pages.urls')), 
+   # path('accounts', include('accounts.urls')),
 
 
     

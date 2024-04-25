@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block 'title' %}User Login{% endblock %}
+
+{% block 'content' %}
+<main>
+    <div id="gallery" style="margin-top: 150px; ">
+     <h2 id="div_titre">Connexion</h2>
+	
+	{% if user.is_authenticated %}
+	<p>vous etes connecté. <br> appuyez sur le lien ci-dessous pour voir votre profile. <br>
+		<a style="color: rgb(78, 199, 236);" href="{% url 'accounts:profile' %}"> <button id="btn">voir votre profile</button></a>
+	</p>
+	
+
+	{% else %}
+    <p id="div_content">Entrez votre mot d'utilisateur et mot de passe pour vous connecter <br> Appuyez sur creer un compte si vous avez pas encore un Beautycompte </p>
+	<form action="{% url 'login' %}" method="POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<p>
+			<input type="submit" value="connecter" id="btn">
+		</p>
+		<p>
+			<a href="{% url 'accounts:create' %}">
+				<input type="button" value="Create Account" id="btn">
+			</a>
+		</p>
+		<p>
+			<a href="{% url 'password_reset' %}">
+				<input type="button" value="Forgot Password?" id="btn">
+			</a>
+		</p>
+	</form>
+	{% endif %}
+</div>
+</main>
+{% endblock %}
+

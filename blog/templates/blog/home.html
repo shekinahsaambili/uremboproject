@@ -2,41 +2,48 @@
 {% extends 'base_template.html' %}
 {% load static %}
 {% block 'content' %}
-  <header >                                                                                         
-    <h1>Urembo_for_us</h1>
-  </header>
-  <div style="display: flex;">
-    <h1>salons disponibles</h1>
   
-    <a href="{% url 'blog:post-add' %}" style="padding-left:700px; "><button style="height: 50px ; margin-top: 20px;">Ajouter un  Salon</button> </a>
-       
+  
+    
+  
+    {% if perms.blog.add_blogpost %}
+<p>
+<a href="{% url 'blog:post-add' %}"> <button id="btn">ajouter un nouveau salon</button></a>
+</p>
+
+{% endif %}
+<div style="display: flex; color: rgb(13, 4, 146) " >
+<h1 style="padding-right: 350px; margin-left: 200px;">salons disponibles</h1> 
+<h1 >Vous pourriez aimer ces models</h1>
   </div>
   
         
-      {% for post in blog_posts %}
-    <div>
-           <h1> <a href="{{ post.get_absolute_url }}">
-        
-            {{ post.title }}         </a> 
-          </h1>
-          <p> ce salon est disponible dans la ville depuis la date du (<em>{{ post.pub_date }}</em>)</p>
       
-    </div>
-            
-              
+  <div class="container">
+    <div class="left">
+        {% for post in blog_posts %}
+        <div>
+            <h1 class="div_titre" style="background-color: rgb(65, 17, 17);">
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </h1>
+            <img src="{{ random_image }}" alt="Image aléatoire">
+            <p>ce salon est disponible dans la ville depuis la date du (<em>{{ post.pub_date }}</em>)</p>
+        </div>
         {% endfor %}
-      
-    
+    </div>
+    <div class="right" style="padding: 20px;">
+        <img src="{% static 'pages/img/new1.jpg' %}">
+        <img src="{% static 'pages/img/new2.jpg' %}">
+        <img src="{% static 'pages/img/new3.jpg' %}">
+        <img src="{% static 'pages/img/new4.jpg' %}">
+        <img src="{% static 'pages/img/new5.jpg' %}">
+    </div>
+</div>
         
-      
-  
-    
   
   <footer > 
-      
-    <h2> <a href="/account/">Créer un Beautycompte</a> </h2>
-    <h2> <a href="/apropos/">Savoir Plus</a> </h2>
-    <h2><a href="/"> page d'accueil</a></h2>
+    <h2> <a href="/apropos/" id="div_end"> Savoir Plus</a> </h2>
+    <h2><a href="/" id="div_end"> page d'accueil</a></h2>  
   </footer>
 
 

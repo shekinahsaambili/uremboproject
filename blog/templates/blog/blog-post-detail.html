@@ -3,26 +3,32 @@
 {% block content %}
 <div style="display: flex;">
     <h1>{{ post.title }}</h1>
-    <p style="margin-left:500 ;"><a href="{% url 'blog:post-change' post.id %}">
-        <button>modifier le contenu du salon</button>
-    </a> </p>
-    <p style="margin-left: 20px;"><a href="{% url 'blog:post-delete' post.id %}">
-        <button>supprimer le salon  </button>
-    </a> </p>
+    {% if perms.blog.change_blogpost %}
+<a href="{% url 'blog:post-change' post.id %}"><button>changer les informations liees au salon</button></a>
+{% endif %}
+{% if perms.blog.delete_blogpost %}
+<a href="{% url 'blog:post-delete' post.id %}"><button>supprimer le salon de la plate orme</button></a>
+{% endif %}
+
 </div>
 <div style="display: inline;">
 
 
 <p>{{ post.content }}</p>
+<p><em>{{ post.num_views }} views</em></p>
 
 {% if post.is_published %}
     <p>ce salon a été publié en date du: <em>{{ post.pub_date }}</em></p>
-{% else %}
+    {% elif perms.blog.publish_blogpost %}
     <form action="{% url 'blog:post-publish' post.id %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="Publish">
+    {% csrf_token %}
+    <input type="submit" value="Publish">
     </form>
+    
+    
 {% endif %}
+
+
 
     <div>
         <p><a href="/marchandise/">consulter le stock des produits</a></p>
