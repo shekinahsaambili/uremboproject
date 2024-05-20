@@ -1,37 +1,64 @@
 
-{% extends 'base_template.html' %}
+
 {% load static %}
 {% block 'content' %}
-  
-  
-    
-  
-    {% if perms.blog.add_blogpost %}
-<p>
-<a href="{% url 'blog:post-add' %}"> <button id="btn">ajouter un nouveau salon</button></a>
-</p>
 
-{% endif %}
-<div style="display: flex; color: rgb(13, 4, 146) " >
-<h1 style="padding-right: 350px; margin-left: 200px;">salons disponibles</h1> 
-<h1 >Vous pourriez aimer ces models</h1>
-  </div>
+<style>
+  #btn{ display: inline-block;
+        padding: 10px 20px;
+        background-color: #460303;
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+  #iner{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+  img{
+    width: 400px;
+    height:400px;
+  }
+</style>
   
-        
-      
-  <div class="container">
-    <div class="left">
-        {% for post in blog_posts %}
-        <div>
-            <h1 class="div_titre" style="background-color: rgb(65, 17, 17);">
-                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
-            </h1>
-            <img src="{{ random_image }}" alt="Image aléatoire">
+<header style="text-align: center; background-color: rgb(4, 46, 8); color:white; padding: 7px 0;">
+    <h1 >Tous les salons</h1>
+</header>
+
+{% if perms.blog.add_salon %}
+<p>
+<a href="{% url 'blog:post-add' %}"> <button id="btn">Ajouter un nouveau salon</button></a>
+</p>
+{% endif %}
+
+<h1 style="text-align: center;">Salons disponibles</h1> 
+
+ 
+     
+  <div class="container" >
+    <div class="left" id="iner" >
+        {% for post in saloons %}
+        <div style="margin: 20px;">
+           
+                <a href="{{ post.get_absolute_url }}"> <h1 class="div_titre" >{{ post.nom_salon }}</h1>
+                  {% if post.image %}
+                  <img style="width:400px" src="{{ post.image.url }}">
+                  {% endif %}
+                </a>
+            
+            
+            
             <p>ce salon est disponible dans la ville depuis la date du (<em>{{ post.pub_date }}</em>)</p>
+            
         </div>
         {% endfor %}
     </div>
-    <div class="right" style="padding: 20px;">
+
+    <h1 style="text-align: center;">Vous pourriez aimer ces models</h1>
+    <div class="right" id="iner">
         <img src="{% static 'pages/img/new1.jpg' %}">
         <img src="{% static 'pages/img/new2.jpg' %}">
         <img src="{% static 'pages/img/new3.jpg' %}">
@@ -41,7 +68,7 @@
 </div>
         
   
-  <footer > 
+  <footer style="text-align: center;"> 
     <h2> <a href="/apropos/" id="div_end"> Savoir Plus</a> </h2>
     <h2><a href="/" id="div_end"> page d'accueil</a></h2>  
   </footer>

@@ -1,7 +1,15 @@
 from django import forms
-from .models import BlogPost
+from .models import salon, product
 
-class BlogPostForm(forms.ModelForm):
+
+
+class salonform(forms.ModelForm):
     class Meta:
-        model = BlogPost
-        fields = [ 'title', 'content', 'is_published', 'pub_date' ]
+        model = salon
+        fields = ['nom_salon', 'description', 'image', 'is_published' , 'pub_date', 'boss', 'contact']
+
+class productform(forms.ModelForm):
+    class Meta:
+        model = product
+        fields =['nom_produit', 'photos', 'prix', 'origine', 'author', 'quantite', 'description']
+        

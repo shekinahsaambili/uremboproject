@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+{% block 'title' %}Delete Post: {{ post.title }}{% endblock %}
+{% block 'content' %}
+
+<h2>Suprimer {{ post.title }} ?</h2>
+<form action="{% url 'blog:post-delete' post.id %}" method="post">
+    {% csrf_token %}
+    <p>Si vous cliquez sur oui, {{ post.title }} sera definitivement retiré de la plate forme.  <br> voulez-vous vraiment le supprimer? </p>
+    <input type="submit" value="oui" style=" width: 100px;">
+    <a href="{{ post.get_absolute_url }}" style="padding-left: 50px;">
+    <input type="button" value="non" style=" width: 100px;">
+</form>
+<footer>
+    <h2>
+        <a href="{% url 'blog:home' %}">voir tous les salons</a>
+    </h2>
+</footer>
+{% endblock %}

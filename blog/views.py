@@ -1,79 +1,118 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 from blog.models import*
-from blog.forms import BlogPostForm
+from blog.forms import  salonform, productform
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required,login_required
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import Group
 
 #   from .models import blog_post
 
 
 def home(request):
-    posts = (BlogPost.objects
+    posts = (salon.objects
     .filter(is_published=True)
     .order_by('-pub_date')[:10]
     )
- # only published posts
-    # We pass the set of posts to the template
+ 
     data = {
-    'blog_posts': posts
+    'saloons': posts
     }
     return render(request, 'blog/home.html', data)
 
-def blog_post_view(request, post_id):
-    blog_post = BlogPost.objects.get(id=post_id)
+def home_prod(request):
+    produits = product.objects.all()
     data = {
-    'post': blog_post
+    'poste': produits
     }
-    return render(request, 'blog/blog-post-view.html', data)
+    return render(request, 'blog/product.html', data) 
 
-def blog_post_detail(request, post_id):
-    blog_post = get_object_or_404(BlogPost, id=post_id) 
+def salon_view(request, post_id):
+    saloon = salon.objects.get(id=post_id)
+    
     data = {
-    'post': blog_post
+    'post': saloon
     }
-    return render(request, 'blog/blog-post-detail.html', data)
+    return render(request, 'blog/salon_view.html', data)
+
+def product_view(request, post_id):
+    produit = product.objects.get(id=post_id)
+    
+    data = {
+    'poste': produit
+    }
+    return render(request, 'blog/product_view.html', data)
+
+def salon_detail(request, post_id):
+    print(list(sal.id for sal in salon.objects.all()))
+    saloon = get_object_or_404(salon, id=post_id) 
+    data = {
+    'post': saloon
+    }
+    return render(request, 'blog/salon_detail.html', data)
+
+def product_detail(request, product_id):
+    produit = get_object_or_404(product, id=product_id) 
+    data = {
+        'produit': produit
+    }
+    return render(request, 'blog/product_detail.html', data)
+
 
 @login_required
-@permission_required('blog:add_blogpost', raise_exception=True)
-def blog_post_add(request):
+@permission_required('blog:add_salon', raise_exception=True)
+def add_salon(request):
     if request.method == "POST":
-        form = BlogPostForm(request.POST)
+        form = salonform(request.POST, request.FILES)
         if form.is_valid():
-            blog_post = form.save()
-            return redirect(blog_post)  # redirects to blog_post.get_absolute_url()
+            saloon = form.save()
+            return redirect(saloon)  
     else:
-        form = BlogPostForm()
-    return render(request, 'blog/blog-post-add.html', { 'form': form })
+        form = salonform()
+    return render(request, 'blog/add_salon.html', { 'form': form })
 
-@permission_required('blog.change_blogpost', raise_exception=True)
-def blog_post_change(request, post_id):
-    post = get_object_or_404(BlogPost, id=post_id) # Need to fetch the specific object
+@login_required
+@permission_required('blog:add_product', raise_exception=True)
+def add_product(request):
     if request.method == "POST":
-        form = BlogPostForm(request.POST, instance=post)
+        form = productform(request.POST, request.FILES)
         if form.is_valid():
-            blog_post = form.save()   # This will update the object
+            product = form.save()
+            return redirect(product)  
+    else:
+        form = productform()
+    return render(request, 'blog/product_add.html', { 'form': form })
+
+
+@permission_required('blog.change_salon', raise_exception=True)
+def changer_salon(request, post_id):
+    saloon = get_object_or_404(salon, id=post_id)
+    if request.method == 'POST':
+        form = salonform(request.POST, request.FILES, instance=saloon) 
+        if form.is_valid():
+            saloon = form.save()   
             return redirect('/blog/')
     else:
-        form = BlogPostForm(instance=post)
-    return render(request, 'blog/blog-post-change.html', { 'form': form, 'post': post })
+        form = salonform(instance=saloon)
+    return render(request, 'blog/changer_salon.html', { 'form': form, 'post': saloon })
 
-@permission_required('blog.delete_blogpost', raise_exception=True)
-def blog_post_delete(request, post_id):
- post = get_object_or_404(BlogPost, id=post_id)
+@permission_required('blog.delete_salon', raise_exception=True)
+def delete_salon(request, post_id):
+ post = get_object_or_404(salon, id=post_id)
  if request.method == "POST":
     post.delete()
     return redirect('/blog/')
- return render(request, 'blog/blog-post-delete.html', { 'post': post })
+ return render(request, 'blog/delete_salon.html', { 'post': post })
 
 from datetime import datetime 
 def blog_post_publish(request, post_id):
- post = get_object_or_404(BlogPost, id=post_id)
+ post = get_object_or_404(salon, id=post_id)
  if request.method == "POST":
     post.is_published = True
     post.pub_date = datetime.now()
     post.save()
- # Redirect to the post's detail page
+ 
  return redirect(post)
 
  # Liste des chemins d'accès des images
@@ -90,3 +129,6 @@ def random_image_view(request):
         "random_image": random_image
     }
     return render(request, "home.html", context)
+
+
+

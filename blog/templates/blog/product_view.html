@@ -1,0 +1,18 @@
+{% extends 'base_template.html' %}
+{% block 'title' %}{{ poste.title }}{% endblock %}
+{% block 'content' %}
+<header>
+<h2>{{ poste.nom_produit }}</h2>
+</header>
+<div><h2>
+    <p>{{ poste.photos }}</p>
+    
+<p><em>{{ post.origine }} views</em></p>
+</h2>
+</div>
+
+<footer>
+<a href="{% url 'blog:home' %}"><h2>voir les salons possibles</h2></a>
+
+</footer>
+{% endblock }

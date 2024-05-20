@@ -29,9 +29,12 @@ DEBUG = True
 ALLOWED_HOSTS = []
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGOUT_REDIRECT_URL = 'pages:index'
 LOGIN_REDIRECT_URL='accounts:profile'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 

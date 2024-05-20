@@ -1,0 +1,37 @@
+
+
+{% block content %}
+<style>
+    #btn { background-color: #4194f3; 
+    color: #fff; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px;
+    margin-left: 50px;
+    text-transform: uppercase; }
+</style>
+
+<div style="display: inline; padding-left: 30%">
+    <h1>{{ produit.nom_produit}}</h1>
+    {% if produit.photos %}
+    <img style="width:400px" src="{{ produit.photos.url }}">
+    {% endif %}
+
+    <h2>Précaution</h2>
+    
+<p style="width: 50%;">{{ produit.description }}</p>
+<p>prix unitaire:{{ produit.prix }} $</p>
+<p>quantité en stock :{{ produit.quantite}} pieces disponible</p>
+<p><em> origine du produit: {{ produit.origine }}  </em></p>
+<p>posté par:{{ produit.author}}</p>
+<button id="btn">acheter</button>
+
+</div>
+    
+        <p><a href="{% url 'blog:home_prod' %}"><button id="btn">voir tous les produits disponibles</button></a></p>
+        
+   
+   
+
+    
+{% endblock %}

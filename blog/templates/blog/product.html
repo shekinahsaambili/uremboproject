@@ -1,0 +1,50 @@
+
+{% load static %}
+{% block 'content' %}
+<style>
+   #ajout{ display: inline-block;
+        padding: 10px 20px;
+        background-color: #460303;
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      
+a , #ajout:hover {
+        background-color: rgb(2, 44, 9);
+      }
+
+ #container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+</style>
+<header style="text-align: center; background-color: rgb(4, 46, 8); color:white; padding: 7px 0;">
+    <h1>Tous les produits</h1>
+
+</header>
+
+<h1> <button><a href="{% url 'blog:product-add' %}" id="ajout" >Ajouter un nouveau produit</a></button></h1>
+
+<div id="container" st>
+{% for post in poste %}
+        <div>
+            <h1 style="color: rgb(25, 25, 65);">
+                <a href="{{ post.get_absolute_url }}"><p>{{ post.nom_produit }}</p></a>
+            </h1>
+            {% if post.photos %}
+            <img style="width:300px; height: 250px;" src="{{ post.photos.url }}">
+            {% endif %}
+            <p>prix: {{ post.prix}}</p> 
+            <p>origine:{{ post.origine}} </p>  
+            <p>posteé par :{{ post.author}} </p>
+            
+        </div> 
+        
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
