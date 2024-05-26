@@ -54,5 +54,27 @@ class dailyPost(models.Model):
 
 
 
+class salonEvaluation(models.Model):
+    RATING_CHOICES = (
+        (1, '1 étoile'),
+        (2, '2 étoiles'),
+        (3, '3 étoiles'),
+        (4, '4 étoiles'),
+        (5, '5 étoiles'),
+    )
 
+    etoiles = models.IntegerField(choices=RATING_CHOICES)
+    commentaire = models.CharField(unique=False, max_length=500)
+    salon_de_coiffure = models.ForeignKey(salon, on_delete=models.CASCADE)
+    utilisateur = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('utilisateur', 'salon_de_coiffure')
+
+class Favoris(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    saloon = models.ForeignKey(salon, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'saloon')
 

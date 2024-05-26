@@ -27,10 +27,11 @@
 <button id="btn">acheter</button>
 
 </div>
-    
-        <p><a href="{% url 'blog:home_prod' %}"><button id="btn">voir tous les produits disponibles</button></a></p>
+
+ <p><a href="{% url 'blog:home_prod' %}"><button id="btn">voir tous les produits disponibles</button></a></p>
         
-   
+ <h3><a href="https://www.facebook.com/sharer/sharer.php?u={{ share_data.url }}">Partager sur Facebook</a></h3>
+ <h3><a href="https://twitter.com/intent/tweet?url={{ share_data.url }}&text={{ share_data.title }}">Partager sur Twitter</a> </h3>
    
 
     

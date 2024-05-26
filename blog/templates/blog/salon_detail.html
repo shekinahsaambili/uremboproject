@@ -20,17 +20,27 @@
 <div style="display: flex; float: left; margin-top: 50px; padding-left: 50px;">
 
 
-<div style="display: inline; width: 60%; ">
+<div style="display: inline; width: 50%; ">
     
     {% if post.image %}
     <img style="width:600px" src="{{ post.image.url }}">
     {% endif %}
     
+    <h2>  <a href="/blog/">voir tous les salons disponibles</a> </h2>  
+    <p><a href="{% url 'blog:add-evaluation'  post.id %}"><button id="btn">evaluer le salon</button></a></p>
+    <p><a href="{% url 'blog:home_evaluation' post.id %}"><button id="btn" style="background-color: #460303;"> commentaires et evaluations</button></a></p>
+
+    {% if user.is_authenticated %}
+    {% if post in user.favoris.all %}
+        <a href="{% url 'blog:ajouter_favoris' post.id %}" id="btn">Retirer des favoris</a>
+    {% else %}
+        <a href="{% url 'blog:ajouter_favoris' post.id %}" id="btn">Ajouter aux favoris</a>
+    {% endif %}
+{% endif %}
 
 
-   
 </div>
-<div style="display: inline;">
+<div style="display: inline; width: 40%; padding-left: 0%; margin-left: auto;">
     <h1>{{ post.title }}</h1>
     {% if perms.blog.change_salon %}
 <a href="{% url 'blog:post-change' post.id %}" ><button id="btn" >changer les informations liees au salon</button></a>
@@ -41,7 +51,7 @@
 <p><a href="{% url 'blog:home_prod' %}"><button id="btn" style="margin-top: 30px;">voir les produits disponibles</button></a></p>
 
 
-<div style="background-color: #9c7f7f; width: 70%; color:rgb(4, 46, 8); margin-top: 80px; margin-left: 40px;">
+<div style=" width: 70%; color:rgb(4, 46, 8); margin-top: 80px; ">
 
 <h2>Description</h2>
 <p>{{ post.description }}</p>
@@ -58,11 +68,18 @@
 
 <p>Proprietaire: {{ post.boss }} </p>
 <p>contactez nous au {{ post.contact }}</p>
+
+
 </div>
 </div>
 </div>
 
-   
 
+</body>
+</html>   
+
+<footer>
+ 
+</footer>
     
 {% endblock %}

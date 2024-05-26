@@ -1,14 +1,32 @@
 
-{% block 'title' %} {{ post.title }}{% endblock %}
+{% block 'title' %} {% endblock %}
 {% block 'content' %}
-   <a href="{% url 'blog:home' %}">voir tous les salons</a>
-   <p>
-    <a href="{% url 'blog:post_view' post.id %}">retour</a>
-    </p>
+<style>
+    #btn{ display: inline-block;
+    padding: 10px 20px;
+    background-color: #460303;
+    color: #fff;
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
+
+<header style="text-align: center; background-color: rgb(4, 46, 8); color: white;  padding: 7px 0;">
+    <h1 >
+        {{ post.nom_salon }}
+    </h1>
+</header>
+<a href="{% url 'blog:post_view' post.id %}" style="color: aliceblue;"> <button id="btn">retour</a></button>
+<h2 ><a href="{% url 'blog:home' %}" style="text-align: end;"> <button id="btn" style="background-color: #034617;">voir tous les salons</button></a> </h2>
+
+
    <h1>changer le contenue du salon</h1>
    <form action="{% url 'blog:post-change' post.id %}" method="post" enctype="multipart/form-data">
        {% csrf_token %}
        {{ form }}
-       <input type="submit" value="Submit">
+       <input type="submit" value="Submit" id="btn">
    </form>
 {% endblock %}

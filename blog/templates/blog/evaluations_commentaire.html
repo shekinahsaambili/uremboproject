@@ -1,0 +1,26 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block 'content' %}
+<h2 style="text-align: end;">  <a href="/blog/" style="color: rgb(247, 243, 250);"> <button id="btn">voir tous les salons disponibles</button></a> </h2> 
+<h1 style="color: rgb(68, 17, 17); text-align: center; margin-bottom: 50px;">Evaluations et commentaires</h1>
+
+{% if evaluation %}
+{% for post in evaluation %}
+        <div style="background-color: rgb(55, 70, 55);">
+          <em>  <h3 style="color: aliceblue;">{{ post.utilisateur}}</h3></em>
+            <p style="color: aliceblue; text-align: start;">{{ post.commentaire}}</p>
+            <h3 style="color: yellow;">{{ post.etoiles}} étoiles</h3>
+            
+        </div> 
+        
+        {% endfor %}
+        {% else %}
+       <h3>Pas d'évaluation faite, Soyez le premier à evaluer ce salon </h3>
+    {% endif %}
+    
+
+   
+
+   <footer style="text-align: center; ">   </footer> 
+{% endblock %}

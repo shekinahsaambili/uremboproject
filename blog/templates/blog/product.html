@@ -1,5 +1,6 @@
 
 {% load static %}
+
 {% block 'content' %}
 <style>
    #ajout{ display: inline-block;
@@ -20,31 +21,58 @@ a , #ajout:hover {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
+#lien{
+    padding-left: 40%;
+     padding-top: 0%; 
+     background-color: #fff;
+
+}
+
 </style>
 <header style="text-align: center; background-color: rgb(4, 46, 8); color:white; padding: 7px 0;">
     <h1>Tous les produits</h1>
 
 </header>
 
-<h1> <button><a href="{% url 'blog:product-add' %}" id="ajout" >Ajouter un nouveau produit</a></button></h1>
+
+<h1 > <button><a href="{% url 'blog:product-add' %}" id="ajout"  >Ajouter un nouveau produit</a></button></h1>
+
+
+<form method="GET" action="{% url 'blog:search_produit' %}" method="post" enctype="multipart/form-data">
+    <input type="text" name="search" placeholder="Rechercher par nom de produit">
+    <input type="submit" value="Rechercher">
+</form>
 
 <div id="container" st>
 {% for post in poste %}
         <div>
-            <h1 style="color: rgb(25, 25, 65);">
-                <a href="{{ post.get_absolute_url }}"><p>{{ post.nom_produit }}</p></a>
-            </h1>
-            {% if post.photos %}
-            <img style="width:300px; height: 250px;" src="{{ post.photos.url }}">
-            {% endif %}
-            <p>prix: {{ post.prix}}</p> 
+                <a href="{{ post.get_absolute_url }}">
+                    <h1 style="color: rgb(25, 25, 65);"><p>{{ post.nom_produit }}</p></h1>
+                        
+                    {% if post.photos %}
+                    <img style="width:300px; height: 250px;" src="{{ post.photos.url }}">
+                    {% endif %}      
+                        </a>
+           
+            <p>prix: {{ post.prix}} $</p> 
             <p>origine:{{ post.origine}} </p>  
+
+
             <p>posteé par :{{ post.author}} </p>
-            
+               
         </div> 
         
         {% endfor %}
 
     </div>
 
+    <footer>
+        <h3><a href="/blog/" id="lien" >voir tous les salons disponibles</a> </h3>
+        <h3>   <a href="/" id="lien" > page d'accueil</a></h3>
+          
+        
+    </footer>
+
 {% endblock %}
+
+
